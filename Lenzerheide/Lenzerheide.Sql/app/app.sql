@@ -1,0 +1,7 @@
+﻿CREATE SCHEMA [app]
+        AUTHORIZATION [dbo];
+GO
+
+GRANT ALTER, DELETE, EXECUTE, INSERT, SELECT, UPDATE ON SCHEMA::[app] TO [Lenzerheide_App] AS [dbo]
+GO
+
