@@ -1,0 +1,334 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceApplication
+  Name="LightSwitchServiceApplication" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication.Attributes>
+    <Partial />
+  </ServiceApplication.Attributes>
+  <EntityType
+    Name="Zimmer">
+    <EntityType.Methods>
+      <EntityMethod
+        Name="Delete">
+        <EntityMethod.Attributes>
+          <Generated />
+        </EntityMethod.Attributes>
+      </EntityMethod>
+    </EntityType.Methods>
+    <EntityType.Properties>
+      <KeyProperty
+        Name="Id"
+        IsReadOnly="True"
+        PropertyType=":Int32">
+        <KeyProperty.Attributes>
+          <Hidden />
+          <Required />
+          <NotSearchable />
+        </KeyProperty.Attributes>
+      </KeyProperty>
+      <EntityProperty
+        Name="RaumNummer"
+        PropertyType=":Int32">
+        <EntityProperty.Attributes>
+          <Required />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="AnzahlRaeume"
+        PropertyType=":Int32">
+        <EntityProperty.Attributes>
+          <Required />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Kategorie"
+        PropertyType=":Int32">
+        <EntityProperty.Attributes>
+          <Required />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <NavigationProperty
+        Name="BewertungZimmers"
+        Association="FK_BewertungZimmer_Zimmer"
+        FromEnd="Zimmer"
+        ToEnd="BewertungZimmer" />
+      <NavigationProperty
+        Name="Reservations"
+        Association="FK_Reservation_Zimmer"
+        FromEnd="Zimmer"
+        ToEnd="Reservation" />
+      <NavigationProperty
+        Name="Zimmer_Zusatzleistungs"
+        Association="FK_Zimmer_Zusatzleistung_Zimmer"
+        FromEnd="Zimmer"
+        ToEnd="Zimmer_Zusatzleistung" />
+    </EntityType.Properties>
+  </EntityType>
+  <Association
+    Name="FK_BewertungZimmer_Zimmer">
+    <AssociationEnd
+      Name="Zimmer"
+      Multiplicity="One"
+      EntityType="Zimmer">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="BewertungZimmer"
+      Multiplicity="Many"
+      EntityType="BewertungZimmer" />
+  </Association>
+  <Association
+    Name="FK_Reservation_Zimmer">
+    <AssociationEnd
+      Name="Zimmer"
+      Multiplicity="One"
+      EntityType="Zimmer">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="Reservation"
+      Multiplicity="Many"
+      EntityType="Reservation" />
+  </Association>
+  <Association
+    Name="FK_Zimmer_Zusatzleistung_Zimmer">
+    <AssociationEnd
+      Name="Zimmer"
+      Multiplicity="One"
+      EntityType="Zimmer">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="Zimmer_Zusatzleistung"
+      Multiplicity="Many"
+      EntityType="Zimmer_Zusatzleistung" />
+  </Association>
+  <EntityContainer
+    Name="LenzerheideData">
+    <EntityContainer.Attributes>
+      <Partial />
+    </EntityContainer.Attributes>
+    <EntitySet
+      Name="Zimmers"
+      CanDelete="True"
+      CanInsert="True"
+      CanUpdate="True"
+      EntityType="Zimmer" />
+    <AssociationSet
+      Name="FK_BewertungZimmer_Zimmer"
+      Association="FK_BewertungZimmer_Zimmer">
+      <AssociationSetEnd
+        Name="Zimmer"
+        EntitySet="Zimmers" />
+      <AssociationSetEnd
+        Name="BewertungZimmer"
+        EntitySet="BewertungZimmers" />
+    </AssociationSet>
+    <AssociationSet
+      Name="FK_Reservation_Zimmer"
+      Association="FK_Reservation_Zimmer">
+      <AssociationSetEnd
+        Name="Zimmer"
+        EntitySet="Zimmers" />
+      <AssociationSetEnd
+        Name="Reservation"
+        EntitySet="Reservations" />
+    </AssociationSet>
+    <AssociationSet
+      Name="FK_Zimmer_Zusatzleistung_Zimmer"
+      Association="FK_Zimmer_Zusatzleistung_Zimmer">
+      <AssociationSetEnd
+        Name="Zimmer"
+        EntitySet="Zimmers" />
+      <AssociationSetEnd
+        Name="Zimmer_Zusatzleistung"
+        EntitySet="Zimmer_Zusatzleistungs" />
+    </AssociationSet>
+    <QueryOperation
+      Name="Zimmers_Single"
+      ReturnType="Zimmer">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s)." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="Id" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="Id" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Zimmers" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="Id"
+        ParameterType="Microsoft.LightSwitch:Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'Id' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <QueryOperation
+      Name="Zimmers_SingleOrDefault"
+      ReturnType="Zimmer">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s) or null if no such entity exists." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="Id" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="Id" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Zimmers" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="Id"
+        ParameterType="Microsoft.LightSwitch:Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'Id' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+  </EntityContainer>
+  <DataService
+    Name="LenzerheideDataDataService">
+    <DataService.Attributes>
+      <Partial />
+    </DataService.Attributes>
+    <EntitySetMapping
+      EntitySet="Zimmers">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="app"
+          Table="Zimmer" />
+        <SsdlProperty
+          Name="Id"
+          Nullable="False"
+          StoreGeneratedPattern="Identity"
+          Type="int"
+          Property="Zimmer/Properties[Id]" />
+        <SsdlProperty
+          Name="RaumNummer"
+          Nullable="False"
+          Type="int"
+          Property="Zimmer/Properties[RaumNummer]" />
+        <SsdlProperty
+          Name="AnzahlRaeume"
+          Nullable="False"
+          Type="int"
+          Property="Zimmer/Properties[AnzahlRaeume]" />
+        <SsdlProperty
+          Name="Kategorie"
+          Nullable="False"
+          Type="int"
+          Property="Zimmer/Properties[Kategorie]" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_BewertungZimmer_Zimmer">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_BewertungZimmer_Zimmer" />
+        <SsdlAssociationSetEnd
+          End="LenzerheideData/Members[FK_BewertungZimmer_Zimmer]/Members[Zimmer]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LenzerheideData/Members[FK_BewertungZimmer_Zimmer]/Members[BewertungZimmer]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ZimmerId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Reservation_Zimmer">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Reservation_Zimmer" />
+        <SsdlAssociationSetEnd
+          End="LenzerheideData/Members[FK_Reservation_Zimmer]/Members[Zimmer]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LenzerheideData/Members[FK_Reservation_Zimmer]/Members[Reservation]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ZimmerId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Zimmer_Zusatzleistung_Zimmer">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Zimmer_Zusatzleistung_Zimmer" />
+        <SsdlAssociationSetEnd
+          End="LenzerheideData/Members[FK_Zimmer_Zusatzleistung_Zimmer]/Members[Zimmer]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LenzerheideData/Members[FK_Zimmer_Zusatzleistung_Zimmer]/Members[Zimmer_Zusatzleistung]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ZimmerId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+  </DataService>
+</ServiceApplication>

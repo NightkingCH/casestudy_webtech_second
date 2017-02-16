@@ -221,3 +221,26 @@ app/**/*.js
 **/typings/**/typings.json
 
 /fetch.sh
+
+
+# Others
+ClientBin/
+~$*
+*~
+*.dbmdl
+*.dbproj.schemaview
+*.jfm
+*.pfx
+*.publishsettings
+node_modules/
+orleans.codegen.cs
+wwwroot/
+wwwroot/**/*.*
+wwwroot/i18n/
+wwwroot/**/*.js
+app/**/*.js
+.vscode/
+**/typings/**/typings.json
+*.refactorlog
+built/
+built/**/*.*

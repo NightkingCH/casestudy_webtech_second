@@ -4,20 +4,971 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="LenzerheideModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
-        <EntityContainer Name="LenzerheideModelStoreContainer" />
-      </Schema>
-    </edmx:StorageModels>
+    <Schema Namespace="LenzerheideModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Adresse">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrtId" Type="int" Nullable="false" />
+          <Property Name="LandId" Type="int" Nullable="false" />
+          <Property Name="Strasse" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Hausnummer" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Bewertung">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KundeId" Type="int" Nullable="false" />
+          <Property Name="BewertungsTyp" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BewertungHotel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BewertungId" Type="int" Nullable="false" />
+          <Property Name="HotelId" Type="int" Nullable="false" />
+          <Property Name="Sterne" Type="int" Nullable="false" />
+          <Property Name="Kommentar" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BewertungZimmer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="BewertungId" Type="int" Nullable="false" />
+          <Property Name="ZimmerId" Type="int" Nullable="false" />
+          <Property Name="Sterne" Type="int" Nullable="false" />
+          <Property Name="Kommentar" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hotel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdresseId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Hotel_Zusatzleistung">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="HotelId" Type="int" Nullable="false" />
+          <Property Name="ZusatzleistungId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Kunde">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="AdresseId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Land">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="IsoString" Type="nvarchar" MaxLength="10" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="KundeId" Type="int" Nullable="false" />
+          <Property Name="EMail" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar" MaxLength="512" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Ort">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="PLZ" Type="nvarchar" MaxLength="20" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ZimmerId" Type="int" Nullable="false" />
+          <Property Name="KundeId" Type="int" Nullable="false" />
+          <Property Name="ReservationsZeitpunkt" Type="datetime2" Precision="7" Nullable="false" />
+          <Property Name="ErstelltAm" Type="datetime2" Precision="7" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Zimmer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RaumNummer" Type="int" Nullable="false" />
+          <Property Name="AnzahlRaeume" Type="int" Nullable="false" />
+          <Property Name="Kategorie" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Zimmer_Zusatzleistung">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ZimmerId" Type="int" Nullable="false" />
+          <Property Name="ZusatzleistungId" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Zusatzleistung">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Beschreibung" Type="nvarchar(max)" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Adresse_Land">
+          <End Role="Land" Type="Self.Land" Multiplicity="1" />
+          <End Role="Adresse" Type="Self.Adresse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Land">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Adresse">
+              <PropertyRef Name="LandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Adresse_Ort">
+          <End Role="Ort" Type="Self.Ort" Multiplicity="1" />
+          <End Role="Adresse" Type="Self.Adresse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ort">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Adresse">
+              <PropertyRef Name="OrtId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bewertung_Kunde">
+          <End Role="Kunde" Type="Self.Kunde" Multiplicity="1" />
+          <End Role="Bewertung" Type="Self.Bewertung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kunde">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bewertung">
+              <PropertyRef Name="KundeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BewertungHotel_Bewertung">
+          <End Role="Bewertung" Type="Self.Bewertung" Multiplicity="1" />
+          <End Role="BewertungHotel" Type="Self.BewertungHotel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bewertung">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BewertungHotel">
+              <PropertyRef Name="BewertungId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BewertungHotel_Hotel">
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="1" />
+          <End Role="BewertungHotel" Type="Self.BewertungHotel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BewertungHotel">
+              <PropertyRef Name="HotelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BewertungZimmer_Bewertung">
+          <End Role="Bewertung" Type="Self.Bewertung" Multiplicity="1" />
+          <End Role="BewertungZimmer" Type="Self.BewertungZimmer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bewertung">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BewertungZimmer">
+              <PropertyRef Name="BewertungId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BewertungZimmer_Zimmer">
+          <End Role="Zimmer" Type="Self.Zimmer" Multiplicity="1" />
+          <End Role="BewertungZimmer" Type="Self.BewertungZimmer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zimmer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BewertungZimmer">
+              <PropertyRef Name="ZimmerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hotel_Adresse">
+          <End Role="Adresse" Type="Self.Adresse" Multiplicity="1" />
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adresse">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Hotel">
+              <PropertyRef Name="AdresseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hotel_Zusatzleistung_Hotel">
+          <End Role="Hotel" Type="Self.Hotel" Multiplicity="1" />
+          <End Role="Hotel_Zusatzleistung" Type="Self.Hotel_Zusatzleistung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Hotel_Zusatzleistung">
+              <PropertyRef Name="HotelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hotel_Zusatzleistung_Zusatzleistung">
+          <End Role="Zusatzleistung" Type="Self.Zusatzleistung" Multiplicity="1" />
+          <End Role="Hotel_Zusatzleistung" Type="Self.Hotel_Zusatzleistung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zusatzleistung">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Hotel_Zusatzleistung">
+              <PropertyRef Name="ZusatzleistungId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kunde_Adresse">
+          <End Role="Adresse" Type="Self.Adresse" Multiplicity="1" />
+          <End Role="Kunde" Type="Self.Kunde" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adresse">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Kunde">
+              <PropertyRef Name="AdresseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Login_Kunde">
+          <End Role="Kunde" Type="Self.Kunde" Multiplicity="1" />
+          <End Role="Login" Type="Self.Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kunde">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="KundeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_Kunde">
+          <End Role="Kunde" Type="Self.Kunde" Multiplicity="1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kunde">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="KundeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_Zimmer">
+          <End Role="Zimmer" Type="Self.Zimmer" Multiplicity="1" />
+          <End Role="Reservation" Type="Self.Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zimmer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="ZimmerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zimmer_Zusatzleistung_Zimmer">
+          <End Role="Zimmer" Type="Self.Zimmer" Multiplicity="1" />
+          <End Role="Zimmer_Zusatzleistung" Type="Self.Zimmer_Zusatzleistung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zimmer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Zimmer_Zusatzleistung">
+              <PropertyRef Name="ZimmerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zimmer_Zusatzleistung_Zusatzleistung">
+          <End Role="Zusatzleistung" Type="Self.Zusatzleistung" Multiplicity="1" />
+          <End Role="Zimmer_Zusatzleistung" Type="Self.Zimmer_Zusatzleistung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zusatzleistung">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Zimmer_Zusatzleistung">
+              <PropertyRef Name="ZusatzleistungId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="LenzerheideModelStoreContainer">
+          <EntitySet Name="Adresse" EntityType="Self.Adresse" Schema="app" store:Type="Tables" />
+          <EntitySet Name="Bewertung" EntityType="Self.Bewertung" Schema="app" store:Type="Tables" />
+          <EntitySet Name="BewertungHotel" EntityType="Self.BewertungHotel" Schema="app" store:Type="Tables" />
+          <EntitySet Name="BewertungZimmer" EntityType="Self.BewertungZimmer" Schema="app" store:Type="Tables" />
+          <EntitySet Name="Hotel" EntityType="Self.Hotel" Schema="app" store:Type="Tables" />
+          <EntitySet Name="Hotel_Zusatzleistung" EntityType="Self.Hotel_Zusatzleistung" Schema="app" store:Type="Tables" />
+          <EntitySet Name="Kunde" EntityType="Self.Kunde" Schema="app" store:Type="Tables" />
+          <EntitySet Name="Land" EntityType="Self.Land" Schema="app" store:Type="Tables" />
+          <EntitySet Name="Login" EntityType="Self.Login" Schema="app" store:Type="Tables" />
+          <EntitySet Name="Ort" EntityType="Self.Ort" Schema="app" store:Type="Tables" />
+          <EntitySet Name="Reservation" EntityType="Self.Reservation" Schema="app" store:Type="Tables" />
+          <EntitySet Name="Zimmer" EntityType="Self.Zimmer" Schema="app" store:Type="Tables" />
+          <EntitySet Name="Zimmer_Zusatzleistung" EntityType="Self.Zimmer_Zusatzleistung" Schema="app" store:Type="Tables" />
+          <EntitySet Name="Zusatzleistung" EntityType="Self.Zusatzleistung" Schema="app" store:Type="Tables" />
+          <AssociationSet Name="FK_Adresse_Land" Association="Self.FK_Adresse_Land">
+            <End Role="Land" EntitySet="Land" />
+            <End Role="Adresse" EntitySet="Adresse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Adresse_Ort" Association="Self.FK_Adresse_Ort">
+            <End Role="Ort" EntitySet="Ort" />
+            <End Role="Adresse" EntitySet="Adresse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bewertung_Kunde" Association="Self.FK_Bewertung_Kunde">
+            <End Role="Kunde" EntitySet="Kunde" />
+            <End Role="Bewertung" EntitySet="Bewertung" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BewertungHotel_Bewertung" Association="Self.FK_BewertungHotel_Bewertung">
+            <End Role="Bewertung" EntitySet="Bewertung" />
+            <End Role="BewertungHotel" EntitySet="BewertungHotel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BewertungHotel_Hotel" Association="Self.FK_BewertungHotel_Hotel">
+            <End Role="Hotel" EntitySet="Hotel" />
+            <End Role="BewertungHotel" EntitySet="BewertungHotel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BewertungZimmer_Bewertung" Association="Self.FK_BewertungZimmer_Bewertung">
+            <End Role="Bewertung" EntitySet="Bewertung" />
+            <End Role="BewertungZimmer" EntitySet="BewertungZimmer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BewertungZimmer_Zimmer" Association="Self.FK_BewertungZimmer_Zimmer">
+            <End Role="Zimmer" EntitySet="Zimmer" />
+            <End Role="BewertungZimmer" EntitySet="BewertungZimmer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hotel_Adresse" Association="Self.FK_Hotel_Adresse">
+            <End Role="Adresse" EntitySet="Adresse" />
+            <End Role="Hotel" EntitySet="Hotel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hotel_Zusatzleistung_Hotel" Association="Self.FK_Hotel_Zusatzleistung_Hotel">
+            <End Role="Hotel" EntitySet="Hotel" />
+            <End Role="Hotel_Zusatzleistung" EntitySet="Hotel_Zusatzleistung" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hotel_Zusatzleistung_Zusatzleistung" Association="Self.FK_Hotel_Zusatzleistung_Zusatzleistung">
+            <End Role="Zusatzleistung" EntitySet="Zusatzleistung" />
+            <End Role="Hotel_Zusatzleistung" EntitySet="Hotel_Zusatzleistung" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kunde_Adresse" Association="Self.FK_Kunde_Adresse">
+            <End Role="Adresse" EntitySet="Adresse" />
+            <End Role="Kunde" EntitySet="Kunde" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Login_Kunde" Association="Self.FK_Login_Kunde">
+            <End Role="Kunde" EntitySet="Kunde" />
+            <End Role="Login" EntitySet="Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_Kunde" Association="Self.FK_Reservation_Kunde">
+            <End Role="Kunde" EntitySet="Kunde" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_Zimmer" Association="Self.FK_Reservation_Zimmer">
+            <End Role="Zimmer" EntitySet="Zimmer" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zimmer_Zusatzleistung_Zimmer" Association="Self.FK_Zimmer_Zusatzleistung_Zimmer">
+            <End Role="Zimmer" EntitySet="Zimmer" />
+            <End Role="Zimmer_Zusatzleistung" EntitySet="Zimmer_Zusatzleistung" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zimmer_Zusatzleistung_Zusatzleistung" Association="Self.FK_Zimmer_Zusatzleistung_Zusatzleistung">
+            <End Role="Zusatzleistung" EntitySet="Zusatzleistung" />
+            <End Role="Zimmer_Zusatzleistung" EntitySet="Zimmer_Zusatzleistung" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="LenzerheideModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-        <EntityContainer Name="LenzerheideEntities" annotation:LazyLoadingEnabled="true" />
+        <EntityContainer Name="LenzerheideEntities" annotation:LazyLoadingEnabled="true" >
+          <EntitySet Name="Adresse" EntityType="LenzerheideModel.Adresse" />
+          <EntitySet Name="Bewertung" EntityType="LenzerheideModel.Bewertung" />
+          <EntitySet Name="BewertungHotel" EntityType="LenzerheideModel.BewertungHotel" />
+          <EntitySet Name="BewertungZimmer" EntityType="LenzerheideModel.BewertungZimmer" />
+          <EntitySet Name="Hotel" EntityType="LenzerheideModel.Hotel" />
+          <EntitySet Name="Hotel_Zusatzleistung" EntityType="LenzerheideModel.Hotel_Zusatzleistung" />
+          <EntitySet Name="Kunde" EntityType="LenzerheideModel.Kunde" />
+          <EntitySet Name="Land" EntityType="LenzerheideModel.Land" />
+          <EntitySet Name="Login" EntityType="LenzerheideModel.Login" />
+          <EntitySet Name="Ort" EntityType="LenzerheideModel.Ort" />
+          <EntitySet Name="Reservation" EntityType="LenzerheideModel.Reservation" />
+          <EntitySet Name="Zimmer" EntityType="LenzerheideModel.Zimmer" />
+          <EntitySet Name="Zimmer_Zusatzleistung" EntityType="LenzerheideModel.Zimmer_Zusatzleistung" />
+          <EntitySet Name="Zusatzleistung" EntityType="LenzerheideModel.Zusatzleistung" />
+          <AssociationSet Name="FK_Adresse_Land" Association="LenzerheideModel.FK_Adresse_Land">
+            <End Role="Land" EntitySet="Land" />
+            <End Role="Adresse" EntitySet="Adresse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Adresse_Ort" Association="LenzerheideModel.FK_Adresse_Ort">
+            <End Role="Ort" EntitySet="Ort" />
+            <End Role="Adresse" EntitySet="Adresse" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hotel_Adresse" Association="LenzerheideModel.FK_Hotel_Adresse">
+            <End Role="Adresse" EntitySet="Adresse" />
+            <End Role="Hotel" EntitySet="Hotel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Kunde_Adresse" Association="LenzerheideModel.FK_Kunde_Adresse">
+            <End Role="Adresse" EntitySet="Adresse" />
+            <End Role="Kunde" EntitySet="Kunde" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Bewertung_Kunde" Association="LenzerheideModel.FK_Bewertung_Kunde">
+            <End Role="Kunde" EntitySet="Kunde" />
+            <End Role="Bewertung" EntitySet="Bewertung" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BewertungHotel_Bewertung" Association="LenzerheideModel.FK_BewertungHotel_Bewertung">
+            <End Role="Bewertung" EntitySet="Bewertung" />
+            <End Role="BewertungHotel" EntitySet="BewertungHotel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BewertungZimmer_Bewertung" Association="LenzerheideModel.FK_BewertungZimmer_Bewertung">
+            <End Role="Bewertung" EntitySet="Bewertung" />
+            <End Role="BewertungZimmer" EntitySet="BewertungZimmer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BewertungHotel_Hotel" Association="LenzerheideModel.FK_BewertungHotel_Hotel">
+            <End Role="Hotel" EntitySet="Hotel" />
+            <End Role="BewertungHotel" EntitySet="BewertungHotel" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BewertungZimmer_Zimmer" Association="LenzerheideModel.FK_BewertungZimmer_Zimmer">
+            <End Role="Zimmer" EntitySet="Zimmer" />
+            <End Role="BewertungZimmer" EntitySet="BewertungZimmer" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hotel_Zusatzleistung_Hotel" Association="LenzerheideModel.FK_Hotel_Zusatzleistung_Hotel">
+            <End Role="Hotel" EntitySet="Hotel" />
+            <End Role="Hotel_Zusatzleistung" EntitySet="Hotel_Zusatzleistung" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Hotel_Zusatzleistung_Zusatzleistung" Association="LenzerheideModel.FK_Hotel_Zusatzleistung_Zusatzleistung">
+            <End Role="Zusatzleistung" EntitySet="Zusatzleistung" />
+            <End Role="Hotel_Zusatzleistung" EntitySet="Hotel_Zusatzleistung" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Login_Kunde" Association="LenzerheideModel.FK_Login_Kunde">
+            <End Role="Kunde" EntitySet="Kunde" />
+            <End Role="Login" EntitySet="Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_Kunde" Association="LenzerheideModel.FK_Reservation_Kunde">
+            <End Role="Kunde" EntitySet="Kunde" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Reservation_Zimmer" Association="LenzerheideModel.FK_Reservation_Zimmer">
+            <End Role="Zimmer" EntitySet="Zimmer" />
+            <End Role="Reservation" EntitySet="Reservation" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zimmer_Zusatzleistung_Zimmer" Association="LenzerheideModel.FK_Zimmer_Zusatzleistung_Zimmer">
+            <End Role="Zimmer" EntitySet="Zimmer" />
+            <End Role="Zimmer_Zusatzleistung" EntitySet="Zimmer_Zusatzleistung" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Zimmer_Zusatzleistung_Zusatzleistung" Association="LenzerheideModel.FK_Zimmer_Zusatzleistung_Zusatzleistung">
+            <End Role="Zusatzleistung" EntitySet="Zusatzleistung" />
+            <End Role="Zimmer_Zusatzleistung" EntitySet="Zimmer_Zusatzleistung" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Adresse">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrtId" Type="Int32" Nullable="false" />
+          <Property Name="LandId" Type="Int32" Nullable="false" />
+          <Property Name="Strasse" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Hausnummer" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Land" Relationship="LenzerheideModel.FK_Adresse_Land" FromRole="Adresse" ToRole="Land" />
+          <NavigationProperty Name="Ort" Relationship="LenzerheideModel.FK_Adresse_Ort" FromRole="Adresse" ToRole="Ort" />
+          <NavigationProperty Name="Hotel" Relationship="LenzerheideModel.FK_Hotel_Adresse" FromRole="Adresse" ToRole="Hotel" />
+          <NavigationProperty Name="Kunde" Relationship="LenzerheideModel.FK_Kunde_Adresse" FromRole="Adresse" ToRole="Kunde" />
+        </EntityType>
+        <EntityType Name="Bewertung">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KundeId" Type="Int32" Nullable="false" />
+          <Property Name="BewertungsTyp" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Kunde" Relationship="LenzerheideModel.FK_Bewertung_Kunde" FromRole="Bewertung" ToRole="Kunde" />
+          <NavigationProperty Name="BewertungHotel" Relationship="LenzerheideModel.FK_BewertungHotel_Bewertung" FromRole="Bewertung" ToRole="BewertungHotel" />
+          <NavigationProperty Name="BewertungZimmer" Relationship="LenzerheideModel.FK_BewertungZimmer_Bewertung" FromRole="Bewertung" ToRole="BewertungZimmer" />
+        </EntityType>
+        <EntityType Name="BewertungHotel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BewertungId" Type="Int32" Nullable="false" />
+          <Property Name="HotelId" Type="Int32" Nullable="false" />
+          <Property Name="Sterne" Type="Int32" Nullable="false" />
+          <Property Name="Kommentar" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Bewertung" Relationship="LenzerheideModel.FK_BewertungHotel_Bewertung" FromRole="BewertungHotel" ToRole="Bewertung" />
+          <NavigationProperty Name="Hotel" Relationship="LenzerheideModel.FK_BewertungHotel_Hotel" FromRole="BewertungHotel" ToRole="Hotel" />
+        </EntityType>
+        <EntityType Name="BewertungZimmer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="BewertungId" Type="Int32" Nullable="false" />
+          <Property Name="ZimmerId" Type="Int32" Nullable="false" />
+          <Property Name="Sterne" Type="Int32" Nullable="false" />
+          <Property Name="Kommentar" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Bewertung" Relationship="LenzerheideModel.FK_BewertungZimmer_Bewertung" FromRole="BewertungZimmer" ToRole="Bewertung" />
+          <NavigationProperty Name="Zimmer" Relationship="LenzerheideModel.FK_BewertungZimmer_Zimmer" FromRole="BewertungZimmer" ToRole="Zimmer" />
+        </EntityType>
+        <EntityType Name="Hotel">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdresseId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Adresse" Relationship="LenzerheideModel.FK_Hotel_Adresse" FromRole="Hotel" ToRole="Adresse" />
+          <NavigationProperty Name="BewertungHotel" Relationship="LenzerheideModel.FK_BewertungHotel_Hotel" FromRole="Hotel" ToRole="BewertungHotel" />
+          <NavigationProperty Name="Hotel_Zusatzleistung" Relationship="LenzerheideModel.FK_Hotel_Zusatzleistung_Hotel" FromRole="Hotel" ToRole="Hotel_Zusatzleistung" />
+        </EntityType>
+        <EntityType Name="Hotel_Zusatzleistung">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="HotelId" Type="Int32" Nullable="false" />
+          <Property Name="ZusatzleistungId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Hotel" Relationship="LenzerheideModel.FK_Hotel_Zusatzleistung_Hotel" FromRole="Hotel_Zusatzleistung" ToRole="Hotel" />
+          <NavigationProperty Name="Zusatzleistung" Relationship="LenzerheideModel.FK_Hotel_Zusatzleistung_Zusatzleistung" FromRole="Hotel_Zusatzleistung" ToRole="Zusatzleistung" />
+        </EntityType>
+        <EntityType Name="Kunde">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="AdresseId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Adresse" Relationship="LenzerheideModel.FK_Kunde_Adresse" FromRole="Kunde" ToRole="Adresse" />
+          <NavigationProperty Name="Bewertung" Relationship="LenzerheideModel.FK_Bewertung_Kunde" FromRole="Kunde" ToRole="Bewertung" />
+          <NavigationProperty Name="Login" Relationship="LenzerheideModel.FK_Login_Kunde" FromRole="Kunde" ToRole="Login" />
+          <NavigationProperty Name="Reservation" Relationship="LenzerheideModel.FK_Reservation_Kunde" FromRole="Kunde" ToRole="Reservation" />
+        </EntityType>
+        <EntityType Name="Land">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsoString" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Adresse" Relationship="LenzerheideModel.FK_Adresse_Land" FromRole="Land" ToRole="Adresse" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="KundeId" Type="Int32" Nullable="false" />
+          <Property Name="EMail" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="PasswordHash" Type="String" Nullable="false" MaxLength="512" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Kunde" Relationship="LenzerheideModel.FK_Login_Kunde" FromRole="Login" ToRole="Kunde" />
+        </EntityType>
+        <EntityType Name="Ort">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PLZ" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Adresse" Relationship="LenzerheideModel.FK_Adresse_Ort" FromRole="Ort" ToRole="Adresse" />
+        </EntityType>
+        <EntityType Name="Reservation">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ZimmerId" Type="Int32" Nullable="false" />
+          <Property Name="KundeId" Type="Int32" Nullable="false" />
+          <Property Name="ReservationsZeitpunkt" Type="DateTime" Nullable="false" Precision="7" />
+          <Property Name="ErstelltAm" Type="DateTime" Nullable="false" Precision="7" />
+          <NavigationProperty Name="Kunde" Relationship="LenzerheideModel.FK_Reservation_Kunde" FromRole="Reservation" ToRole="Kunde" />
+          <NavigationProperty Name="Zimmer" Relationship="LenzerheideModel.FK_Reservation_Zimmer" FromRole="Reservation" ToRole="Zimmer" />
+        </EntityType>
+        <EntityType Name="Zimmer">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RaumNummer" Type="Int32" Nullable="false" />
+          <Property Name="AnzahlRaeume" Type="Int32" Nullable="false" />
+          <Property Name="Kategorie" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="BewertungZimmer" Relationship="LenzerheideModel.FK_BewertungZimmer_Zimmer" FromRole="Zimmer" ToRole="BewertungZimmer" />
+          <NavigationProperty Name="Reservation" Relationship="LenzerheideModel.FK_Reservation_Zimmer" FromRole="Zimmer" ToRole="Reservation" />
+          <NavigationProperty Name="Zimmer_Zusatzleistung" Relationship="LenzerheideModel.FK_Zimmer_Zusatzleistung_Zimmer" FromRole="Zimmer" ToRole="Zimmer_Zusatzleistung" />
+        </EntityType>
+        <EntityType Name="Zimmer_Zusatzleistung">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ZimmerId" Type="Int32" Nullable="false" />
+          <Property Name="ZusatzleistungId" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Zimmer" Relationship="LenzerheideModel.FK_Zimmer_Zusatzleistung_Zimmer" FromRole="Zimmer_Zusatzleistung" ToRole="Zimmer" />
+          <NavigationProperty Name="Zusatzleistung" Relationship="LenzerheideModel.FK_Zimmer_Zusatzleistung_Zusatzleistung" FromRole="Zimmer_Zusatzleistung" ToRole="Zusatzleistung" />
+        </EntityType>
+        <EntityType Name="Zusatzleistung">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Beschreibung" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Hotel_Zusatzleistung" Relationship="LenzerheideModel.FK_Hotel_Zusatzleistung_Zusatzleistung" FromRole="Zusatzleistung" ToRole="Hotel_Zusatzleistung" />
+          <NavigationProperty Name="Zimmer_Zusatzleistung" Relationship="LenzerheideModel.FK_Zimmer_Zusatzleistung_Zusatzleistung" FromRole="Zusatzleistung" ToRole="Zimmer_Zusatzleistung" />
+        </EntityType>
+        <Association Name="FK_Adresse_Land">
+          <End Type="LenzerheideModel.Land" Role="Land" Multiplicity="1" />
+          <End Type="LenzerheideModel.Adresse" Role="Adresse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Land">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Adresse">
+              <PropertyRef Name="LandId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Adresse_Ort">
+          <End Type="LenzerheideModel.Ort" Role="Ort" Multiplicity="1" />
+          <End Type="LenzerheideModel.Adresse" Role="Adresse" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Ort">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Adresse">
+              <PropertyRef Name="OrtId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hotel_Adresse">
+          <End Type="LenzerheideModel.Adresse" Role="Adresse" Multiplicity="1" />
+          <End Type="LenzerheideModel.Hotel" Role="Hotel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adresse">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Hotel">
+              <PropertyRef Name="AdresseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Kunde_Adresse">
+          <End Type="LenzerheideModel.Adresse" Role="Adresse" Multiplicity="1" />
+          <End Type="LenzerheideModel.Kunde" Role="Kunde" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Adresse">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Kunde">
+              <PropertyRef Name="AdresseId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Bewertung_Kunde">
+          <End Type="LenzerheideModel.Kunde" Role="Kunde" Multiplicity="1" />
+          <End Type="LenzerheideModel.Bewertung" Role="Bewertung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kunde">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Bewertung">
+              <PropertyRef Name="KundeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BewertungHotel_Bewertung">
+          <End Type="LenzerheideModel.Bewertung" Role="Bewertung" Multiplicity="1" />
+          <End Type="LenzerheideModel.BewertungHotel" Role="BewertungHotel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bewertung">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BewertungHotel">
+              <PropertyRef Name="BewertungId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BewertungZimmer_Bewertung">
+          <End Type="LenzerheideModel.Bewertung" Role="Bewertung" Multiplicity="1" />
+          <End Type="LenzerheideModel.BewertungZimmer" Role="BewertungZimmer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Bewertung">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BewertungZimmer">
+              <PropertyRef Name="BewertungId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BewertungHotel_Hotel">
+          <End Type="LenzerheideModel.Hotel" Role="Hotel" Multiplicity="1" />
+          <End Type="LenzerheideModel.BewertungHotel" Role="BewertungHotel" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BewertungHotel">
+              <PropertyRef Name="HotelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BewertungZimmer_Zimmer">
+          <End Type="LenzerheideModel.Zimmer" Role="Zimmer" Multiplicity="1" />
+          <End Type="LenzerheideModel.BewertungZimmer" Role="BewertungZimmer" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zimmer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="BewertungZimmer">
+              <PropertyRef Name="ZimmerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hotel_Zusatzleistung_Hotel">
+          <End Type="LenzerheideModel.Hotel" Role="Hotel" Multiplicity="1" />
+          <End Type="LenzerheideModel.Hotel_Zusatzleistung" Role="Hotel_Zusatzleistung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Hotel">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Hotel_Zusatzleistung">
+              <PropertyRef Name="HotelId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Hotel_Zusatzleistung_Zusatzleistung">
+          <End Type="LenzerheideModel.Zusatzleistung" Role="Zusatzleistung" Multiplicity="1" />
+          <End Type="LenzerheideModel.Hotel_Zusatzleistung" Role="Hotel_Zusatzleistung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zusatzleistung">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Hotel_Zusatzleistung">
+              <PropertyRef Name="ZusatzleistungId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Login_Kunde">
+          <End Type="LenzerheideModel.Kunde" Role="Kunde" Multiplicity="1" />
+          <End Type="LenzerheideModel.Login" Role="Login" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kunde">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Login">
+              <PropertyRef Name="KundeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_Kunde">
+          <End Type="LenzerheideModel.Kunde" Role="Kunde" Multiplicity="1" />
+          <End Type="LenzerheideModel.Reservation" Role="Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Kunde">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="KundeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Reservation_Zimmer">
+          <End Type="LenzerheideModel.Zimmer" Role="Zimmer" Multiplicity="1" />
+          <End Type="LenzerheideModel.Reservation" Role="Reservation" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zimmer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Reservation">
+              <PropertyRef Name="ZimmerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zimmer_Zusatzleistung_Zimmer">
+          <End Type="LenzerheideModel.Zimmer" Role="Zimmer" Multiplicity="1" />
+          <End Type="LenzerheideModel.Zimmer_Zusatzleistung" Role="Zimmer_Zusatzleistung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zimmer">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Zimmer_Zusatzleistung">
+              <PropertyRef Name="ZimmerId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Zimmer_Zusatzleistung_Zusatzleistung">
+          <End Type="LenzerheideModel.Zusatzleistung" Role="Zusatzleistung" Multiplicity="1" />
+          <End Type="LenzerheideModel.Zimmer_Zusatzleistung" Role="Zimmer_Zusatzleistung" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Zusatzleistung">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Zimmer_Zusatzleistung">
+              <PropertyRef Name="ZusatzleistungId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="LenzerheideModelStoreContainer" CdmEntityContainer="LenzerheideEntities" />
+        <EntityContainerMapping StorageEntityContainer="LenzerheideModelStoreContainer" CdmEntityContainer="LenzerheideEntities" >
+          <EntitySetMapping Name="Adresse">
+            <EntityTypeMapping TypeName="LenzerheideModel.Adresse">
+              <MappingFragment StoreEntitySet="Adresse">
+                <ScalarProperty Name="Hausnummer" ColumnName="Hausnummer" />
+                <ScalarProperty Name="Strasse" ColumnName="Strasse" />
+                <ScalarProperty Name="LandId" ColumnName="LandId" />
+                <ScalarProperty Name="OrtId" ColumnName="OrtId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Bewertung">
+            <EntityTypeMapping TypeName="LenzerheideModel.Bewertung">
+              <MappingFragment StoreEntitySet="Bewertung">
+                <ScalarProperty Name="BewertungsTyp" ColumnName="BewertungsTyp" />
+                <ScalarProperty Name="KundeId" ColumnName="KundeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BewertungHotel">
+            <EntityTypeMapping TypeName="LenzerheideModel.BewertungHotel">
+              <MappingFragment StoreEntitySet="BewertungHotel">
+                <ScalarProperty Name="Kommentar" ColumnName="Kommentar" />
+                <ScalarProperty Name="Sterne" ColumnName="Sterne" />
+                <ScalarProperty Name="HotelId" ColumnName="HotelId" />
+                <ScalarProperty Name="BewertungId" ColumnName="BewertungId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BewertungZimmer">
+            <EntityTypeMapping TypeName="LenzerheideModel.BewertungZimmer">
+              <MappingFragment StoreEntitySet="BewertungZimmer">
+                <ScalarProperty Name="Kommentar" ColumnName="Kommentar" />
+                <ScalarProperty Name="Sterne" ColumnName="Sterne" />
+                <ScalarProperty Name="ZimmerId" ColumnName="ZimmerId" />
+                <ScalarProperty Name="BewertungId" ColumnName="BewertungId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hotel">
+            <EntityTypeMapping TypeName="LenzerheideModel.Hotel">
+              <MappingFragment StoreEntitySet="Hotel">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AdresseId" ColumnName="AdresseId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Hotel_Zusatzleistung">
+            <EntityTypeMapping TypeName="LenzerheideModel.Hotel_Zusatzleistung">
+              <MappingFragment StoreEntitySet="Hotel_Zusatzleistung">
+                <ScalarProperty Name="ZusatzleistungId" ColumnName="ZusatzleistungId" />
+                <ScalarProperty Name="HotelId" ColumnName="HotelId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Kunde">
+            <EntityTypeMapping TypeName="LenzerheideModel.Kunde">
+              <MappingFragment StoreEntitySet="Kunde">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="AdresseId" ColumnName="AdresseId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Land">
+            <EntityTypeMapping TypeName="LenzerheideModel.Land">
+              <MappingFragment StoreEntitySet="Land">
+                <ScalarProperty Name="IsoString" ColumnName="IsoString" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Login">
+            <EntityTypeMapping TypeName="LenzerheideModel.Login">
+              <MappingFragment StoreEntitySet="Login">
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EMail" ColumnName="EMail" />
+                <ScalarProperty Name="KundeId" ColumnName="KundeId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Ort">
+            <EntityTypeMapping TypeName="LenzerheideModel.Ort">
+              <MappingFragment StoreEntitySet="Ort">
+                <ScalarProperty Name="PLZ" ColumnName="PLZ" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Reservation">
+            <EntityTypeMapping TypeName="LenzerheideModel.Reservation">
+              <MappingFragment StoreEntitySet="Reservation">
+                <ScalarProperty Name="ErstelltAm" ColumnName="ErstelltAm" />
+                <ScalarProperty Name="ReservationsZeitpunkt" ColumnName="ReservationsZeitpunkt" />
+                <ScalarProperty Name="KundeId" ColumnName="KundeId" />
+                <ScalarProperty Name="ZimmerId" ColumnName="ZimmerId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zimmer">
+            <EntityTypeMapping TypeName="LenzerheideModel.Zimmer">
+              <MappingFragment StoreEntitySet="Zimmer">
+                <ScalarProperty Name="Kategorie" ColumnName="Kategorie" />
+                <ScalarProperty Name="AnzahlRaeume" ColumnName="AnzahlRaeume" />
+                <ScalarProperty Name="RaumNummer" ColumnName="RaumNummer" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zimmer_Zusatzleistung">
+            <EntityTypeMapping TypeName="LenzerheideModel.Zimmer_Zusatzleistung">
+              <MappingFragment StoreEntitySet="Zimmer_Zusatzleistung">
+                <ScalarProperty Name="ZusatzleistungId" ColumnName="ZusatzleistungId" />
+                <ScalarProperty Name="ZimmerId" ColumnName="ZimmerId" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Zusatzleistung">
+            <EntityTypeMapping TypeName="LenzerheideModel.Zusatzleistung">
+              <MappingFragment StoreEntitySet="Zusatzleistung">
+                <ScalarProperty Name="Beschreibung" ColumnName="Beschreibung" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

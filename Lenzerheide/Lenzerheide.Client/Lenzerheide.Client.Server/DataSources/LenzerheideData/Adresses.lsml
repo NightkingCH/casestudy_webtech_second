@@ -1,0 +1,292 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceApplication
+  Name="LightSwitchServiceApplication" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication.Attributes>
+    <Partial />
+  </ServiceApplication.Attributes>
+  <EntityType
+    Name="Adresse">
+    <EntityType.Methods>
+      <EntityMethod
+        Name="Delete">
+        <EntityMethod.Attributes>
+          <Generated />
+        </EntityMethod.Attributes>
+      </EntityMethod>
+    </EntityType.Methods>
+    <EntityType.Properties>
+      <KeyProperty
+        Name="Id"
+        IsReadOnly="True"
+        PropertyType=":Int32">
+        <KeyProperty.Attributes>
+          <Hidden />
+          <Required />
+          <NotSearchable />
+        </KeyProperty.Attributes>
+      </KeyProperty>
+      <EntityProperty
+        Name="Strasse"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <EntityProperty
+        Name="Hausnummer"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength
+            Value="10" />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <NavigationProperty
+        Name="Land"
+        Association="FK_Adresse_Land"
+        FromEnd="Adresse"
+        ToEnd="Land" />
+      <NavigationProperty
+        Name="Ort"
+        Association="FK_Adresse_Ort"
+        FromEnd="Adresse"
+        ToEnd="Ort" />
+      <NavigationProperty
+        Name="Hotels"
+        Association="FK_Hotel_Adresse"
+        FromEnd="Adresse"
+        ToEnd="Hotel" />
+      <NavigationProperty
+        Name="Kundes"
+        Association="FK_Kunde_Adresse"
+        FromEnd="Adresse"
+        ToEnd="Kunde" />
+    </EntityType.Properties>
+  </EntityType>
+  <Association
+    Name="FK_Hotel_Adresse">
+    <AssociationEnd
+      Name="Adresse"
+      Multiplicity="One"
+      EntityType="Adresse">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="Hotel"
+      Multiplicity="Many"
+      EntityType="Hotel" />
+  </Association>
+  <Association
+    Name="FK_Kunde_Adresse">
+    <AssociationEnd
+      Name="Adresse"
+      Multiplicity="One"
+      EntityType="Adresse">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="Kunde"
+      Multiplicity="Many"
+      EntityType="Kunde" />
+  </Association>
+  <EntityContainer
+    Name="LenzerheideData">
+    <EntityContainer.Attributes>
+      <Partial />
+    </EntityContainer.Attributes>
+    <EntitySet
+      Name="Adresses"
+      CanDelete="True"
+      CanInsert="True"
+      CanUpdate="True"
+      EntityType="Adresse" />
+    <AssociationSet
+      Name="FK_Hotel_Adresse"
+      Association="FK_Hotel_Adresse">
+      <AssociationSetEnd
+        Name="Adresse"
+        EntitySet="Adresses" />
+      <AssociationSetEnd
+        Name="Hotel"
+        EntitySet="Hotels" />
+    </AssociationSet>
+    <AssociationSet
+      Name="FK_Kunde_Adresse"
+      Association="FK_Kunde_Adresse">
+      <AssociationSetEnd
+        Name="Adresse"
+        EntitySet="Adresses" />
+      <AssociationSetEnd
+        Name="Kunde"
+        EntitySet="Kundes" />
+    </AssociationSet>
+    <QueryOperation
+      Name="Adresses_Single"
+      ReturnType="Adresse">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s)." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="Id" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="Id" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Adresses" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="Id"
+        ParameterType="Microsoft.LightSwitch:Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'Id' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <QueryOperation
+      Name="Adresses_SingleOrDefault"
+      ReturnType="Adresse">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s) or null if no such entity exists." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="Id" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="Id" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Adresses" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="Id"
+        ParameterType="Microsoft.LightSwitch:Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'Id' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+  </EntityContainer>
+  <DataService
+    Name="LenzerheideDataDataService">
+    <DataService.Attributes>
+      <Partial />
+    </DataService.Attributes>
+    <EntitySetMapping
+      EntitySet="Adresses">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="app"
+          Table="Adresse" />
+        <SsdlProperty
+          Name="Id"
+          Nullable="False"
+          StoreGeneratedPattern="Identity"
+          Type="int"
+          Property="Adresse/Properties[Id]" />
+        <SsdlProperty
+          Name="Strasse"
+          Nullable="False"
+          Type="nvarchar(max)"
+          Property="Adresse/Properties[Strasse]" />
+        <SsdlProperty
+          MaxLength="10"
+          Name="Hausnummer"
+          Nullable="False"
+          Type="nvarchar"
+          Property="Adresse/Properties[Hausnummer]" />
+        <SsdlForeignKeyProperty
+          Name="LandId"
+          Nullable="False"
+          Type="int"
+          PropertyName="LandId" />
+        <SsdlForeignKeyProperty
+          Name="OrtId"
+          Nullable="False"
+          Type="int"
+          PropertyName="OrtId" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Hotel_Adresse">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Hotel_Adresse" />
+        <SsdlAssociationSetEnd
+          End="LenzerheideData/Members[FK_Hotel_Adresse]/Members[Adresse]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LenzerheideData/Members[FK_Hotel_Adresse]/Members[Hotel]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="AdresseId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Kunde_Adresse">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Kunde_Adresse" />
+        <SsdlAssociationSetEnd
+          End="LenzerheideData/Members[FK_Kunde_Adresse]/Members[Adresse]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LenzerheideData/Members[FK_Kunde_Adresse]/Members[Kunde]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="AdresseId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+  </DataService>
+</ServiceApplication>

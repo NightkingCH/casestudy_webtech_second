@@ -1,0 +1,318 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceApplication
+  Name="LightSwitchServiceApplication" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication.Attributes>
+    <Partial />
+  </ServiceApplication.Attributes>
+  <EntityType
+    Name="Kunde">
+    <EntityType.Methods>
+      <EntityMethod
+        Name="Delete">
+        <EntityMethod.Attributes>
+          <Generated />
+        </EntityMethod.Attributes>
+      </EntityMethod>
+    </EntityType.Methods>
+    <EntityType.Properties>
+      <KeyProperty
+        Name="Id"
+        IsReadOnly="True"
+        PropertyType=":Int32">
+        <KeyProperty.Attributes>
+          <Hidden />
+          <Required />
+          <NotSearchable />
+        </KeyProperty.Attributes>
+      </KeyProperty>
+      <EntityProperty
+        Name="Name"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <NavigationProperty
+        Name="Bewertungs"
+        Association="FK_Bewertung_Kunde"
+        FromEnd="Kunde"
+        ToEnd="Bewertung" />
+      <NavigationProperty
+        Name="Adresse"
+        Association="FK_Kunde_Adresse"
+        FromEnd="Kunde"
+        ToEnd="Adresse" />
+      <NavigationProperty
+        Name="Logins"
+        Association="FK_Login_Kunde"
+        FromEnd="Kunde"
+        ToEnd="Login" />
+      <NavigationProperty
+        Name="Reservations"
+        Association="FK_Reservation_Kunde"
+        FromEnd="Kunde"
+        ToEnd="Reservation" />
+    </EntityType.Properties>
+  </EntityType>
+  <Association
+    Name="FK_Bewertung_Kunde">
+    <AssociationEnd
+      Name="Kunde"
+      Multiplicity="One"
+      EntityType="Kunde">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="Bewertung"
+      Multiplicity="Many"
+      EntityType="Bewertung" />
+  </Association>
+  <Association
+    Name="FK_Login_Kunde">
+    <AssociationEnd
+      Name="Kunde"
+      Multiplicity="One"
+      EntityType="Kunde">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="Login"
+      Multiplicity="Many"
+      EntityType="Login" />
+  </Association>
+  <Association
+    Name="FK_Reservation_Kunde">
+    <AssociationEnd
+      Name="Kunde"
+      Multiplicity="One"
+      EntityType="Kunde">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="Reservation"
+      Multiplicity="Many"
+      EntityType="Reservation" />
+  </Association>
+  <EntityContainer
+    Name="LenzerheideData">
+    <EntityContainer.Attributes>
+      <Partial />
+    </EntityContainer.Attributes>
+    <EntitySet
+      Name="Kundes"
+      CanDelete="True"
+      CanInsert="True"
+      CanUpdate="True"
+      EntityType="Kunde" />
+    <AssociationSet
+      Name="FK_Bewertung_Kunde"
+      Association="FK_Bewertung_Kunde">
+      <AssociationSetEnd
+        Name="Kunde"
+        EntitySet="Kundes" />
+      <AssociationSetEnd
+        Name="Bewertung"
+        EntitySet="Bewertungs" />
+    </AssociationSet>
+    <AssociationSet
+      Name="FK_Login_Kunde"
+      Association="FK_Login_Kunde">
+      <AssociationSetEnd
+        Name="Kunde"
+        EntitySet="Kundes" />
+      <AssociationSetEnd
+        Name="Login"
+        EntitySet="Logins" />
+    </AssociationSet>
+    <AssociationSet
+      Name="FK_Reservation_Kunde"
+      Association="FK_Reservation_Kunde">
+      <AssociationSetEnd
+        Name="Kunde"
+        EntitySet="Kundes" />
+      <AssociationSetEnd
+        Name="Reservation"
+        EntitySet="Reservations" />
+    </AssociationSet>
+    <QueryOperation
+      Name="Kundes_Single"
+      ReturnType="Kunde">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s)." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="Id" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="Id" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Kundes" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="Id"
+        ParameterType="Microsoft.LightSwitch:Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'Id' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <QueryOperation
+      Name="Kundes_SingleOrDefault"
+      ReturnType="Kunde">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s) or null if no such entity exists." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="Id" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="Id" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Kundes" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="Id"
+        ParameterType="Microsoft.LightSwitch:Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'Id' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+  </EntityContainer>
+  <DataService
+    Name="LenzerheideDataDataService">
+    <DataService.Attributes>
+      <Partial />
+    </DataService.Attributes>
+    <EntitySetMapping
+      EntitySet="Kundes">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="app"
+          Table="Kunde" />
+        <SsdlProperty
+          Name="Id"
+          Nullable="False"
+          StoreGeneratedPattern="Identity"
+          Type="int"
+          Property="Kunde/Properties[Id]" />
+        <SsdlProperty
+          Name="Name"
+          Nullable="False"
+          Type="nvarchar(max)"
+          Property="Kunde/Properties[Name]" />
+        <SsdlForeignKeyProperty
+          Name="AdresseId"
+          Nullable="False"
+          Type="int"
+          PropertyName="AdresseId" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Bewertung_Kunde">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Bewertung_Kunde" />
+        <SsdlAssociationSetEnd
+          End="LenzerheideData/Members[FK_Bewertung_Kunde]/Members[Kunde]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LenzerheideData/Members[FK_Bewertung_Kunde]/Members[Bewertung]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="KundeId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Login_Kunde">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Login_Kunde" />
+        <SsdlAssociationSetEnd
+          End="LenzerheideData/Members[FK_Login_Kunde]/Members[Kunde]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LenzerheideData/Members[FK_Login_Kunde]/Members[Login]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="KundeId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Reservation_Kunde">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Reservation_Kunde" />
+        <SsdlAssociationSetEnd
+          End="LenzerheideData/Members[FK_Reservation_Kunde]/Members[Kunde]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LenzerheideData/Members[FK_Reservation_Kunde]/Members[Reservation]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="KundeId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+  </DataService>
+</ServiceApplication>

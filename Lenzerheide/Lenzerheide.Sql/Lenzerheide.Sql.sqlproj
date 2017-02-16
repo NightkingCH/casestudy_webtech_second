@@ -61,13 +61,15 @@
     <Folder Include="app" />
     <Folder Include="PostDeployment" />
     <Folder Include="PreDeployment" />
-    <Folder Include="business" />
     <Folder Include="app\Indices" />
     <Folder Include="app\Tables" />
     <Folder Include="app\Views" />
+    <Folder Include="Security" />
+    <Folder Include="Security\Logins" />
+    <Folder Include="Security\Users" />
   </ItemGroup>
   <ItemGroup>
-    <PostDeploy Include="PostDeployment\Script.PostDeployment.sql" />
+    <None Include="PostDeployment\Script.PostDeployment.sql" />
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="PreDeployment\Script.PreDeployment.sql" />
@@ -75,15 +77,22 @@
   <ItemGroup>
     <Build Include="app\Tables\Adresse.sql" />
     <Build Include="app\app.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Lenzerheide.Sql.Master\Lenzerheide.Sql.Master.sqlproj">
-      <Name>Lenzerheide.Sql.Master</Name>
-      <Project>{183d8f7a-1d69-470b-9a5e-5eee4ddb96e5}</Project>
-      <Private>True</Private>
-      <SuppressMissingDependenciesErrors>False</SuppressMissingDependenciesErrors>
-      <DatabaseVariableLiteralValue>Lenzerheide.Sql.Master</DatabaseVariableLiteralValue>
-    </ProjectReference>
+    <Build Include="app\Tables\Bewertung.sql" />
+    <Build Include="app\Tables\BewertungHotel.sql" />
+    <Build Include="app\Tables\BewertungZimmer.sql" />
+    <Build Include="app\Tables\Zimmer_Zusatzleistung.sql" />
+    <Build Include="app\Tables\Login.sql" />
+    <Build Include="app\Tables\Ort.sql" />
+    <Build Include="app\Tables\Land.sql" />
+    <Build Include="app\Tables\Kunde.sql" />
+    <Build Include="app\Tables\Reservation.sql" />
+    <Build Include="app\Tables\Hotel.sql" />
+    <Build Include="app\Tables\Zusatzleistung.sql" />
+    <Build Include="app\Tables\Hotel_Zusatzleistung.sql" />
+    <Build Include="app\Tables\Zimmer.sql" />
+    <Build Include="Security\Logins\Lenzerheide_App.sql" />
+    <Build Include="Security\Users\Lenzerheide_App.sql" />
+    <Build Include="PostDeployment\01_GrantConnect.sql" />
   </ItemGroup>
   <ItemGroup>
     <ArtifactReference Include="$(DacPacRootPath)\Extensions\Microsoft\SQLDB\Extensions\SqlServer\120\SqlSchemas\master.dacpac">

@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceApplication
+  Name="LightSwitchServiceApplication" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication.Attributes>
+    <Partial />
+  </ServiceApplication.Attributes>
+  <EntityType
+    Name="Hotel">
+    <EntityType.Methods>
+      <EntityMethod
+        Name="Delete">
+        <EntityMethod.Attributes>
+          <Generated />
+        </EntityMethod.Attributes>
+      </EntityMethod>
+    </EntityType.Methods>
+    <EntityType.Properties>
+      <KeyProperty
+        Name="Id"
+        IsReadOnly="True"
+        PropertyType=":Int32">
+        <KeyProperty.Attributes>
+          <Hidden />
+          <Required />
+          <NotSearchable />
+        </KeyProperty.Attributes>
+      </KeyProperty>
+      <EntityProperty
+        Name="Name"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <NavigationProperty
+        Name="BewertungHotels"
+        Association="FK_BewertungHotel_Hotel"
+        FromEnd="Hotel"
+        ToEnd="BewertungHotel" />
+      <NavigationProperty
+        Name="Adresse"
+        Association="FK_Hotel_Adresse"
+        FromEnd="Hotel"
+        ToEnd="Adresse" />
+      <NavigationProperty
+        Name="Hotel_Zusatzleistungs"
+        Association="FK_Hotel_Zusatzleistung_Hotel"
+        FromEnd="Hotel"
+        ToEnd="Hotel_Zusatzleistung" />
+    </EntityType.Properties>
+  </EntityType>
+  <Association
+    Name="FK_BewertungHotel_Hotel">
+    <AssociationEnd
+      Name="Hotel"
+      Multiplicity="One"
+      EntityType="Hotel">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="BewertungHotel"
+      Multiplicity="Many"
+      EntityType="BewertungHotel" />
+  </Association>
+  <Association
+    Name="FK_Hotel_Zusatzleistung_Hotel">
+    <AssociationEnd
+      Name="Hotel"
+      Multiplicity="One"
+      EntityType="Hotel">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="Hotel_Zusatzleistung"
+      Multiplicity="Many"
+      EntityType="Hotel_Zusatzleistung" />
+  </Association>
+  <EntityContainer
+    Name="LenzerheideData">
+    <EntityContainer.Attributes>
+      <Partial />
+    </EntityContainer.Attributes>
+    <EntitySet
+      Name="Hotels"
+      CanDelete="True"
+      CanInsert="True"
+      CanUpdate="True"
+      EntityType="Hotel" />
+    <AssociationSet
+      Name="FK_BewertungHotel_Hotel"
+      Association="FK_BewertungHotel_Hotel">
+      <AssociationSetEnd
+        Name="Hotel"
+        EntitySet="Hotels" />
+      <AssociationSetEnd
+        Name="BewertungHotel"
+        EntitySet="BewertungHotels" />
+    </AssociationSet>
+    <AssociationSet
+      Name="FK_Hotel_Zusatzleistung_Hotel"
+      Association="FK_Hotel_Zusatzleistung_Hotel">
+      <AssociationSetEnd
+        Name="Hotel"
+        EntitySet="Hotels" />
+      <AssociationSetEnd
+        Name="Hotel_Zusatzleistung"
+        EntitySet="Hotel_Zusatzleistungs" />
+    </AssociationSet>
+    <QueryOperation
+      Name="Hotels_Single"
+      ReturnType="Hotel">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s)." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="Id" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="Id" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Hotels" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="Id"
+        ParameterType="Microsoft.LightSwitch:Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'Id' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <QueryOperation
+      Name="Hotels_SingleOrDefault"
+      ReturnType="Hotel">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s) or null if no such entity exists." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="Id" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="Id" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Hotels" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="Id"
+        ParameterType="Microsoft.LightSwitch:Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'Id' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+  </EntityContainer>
+  <DataService
+    Name="LenzerheideDataDataService">
+    <DataService.Attributes>
+      <Partial />
+    </DataService.Attributes>
+    <EntitySetMapping
+      EntitySet="Hotels">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="app"
+          Table="Hotel" />
+        <SsdlProperty
+          Name="Id"
+          Nullable="False"
+          StoreGeneratedPattern="Identity"
+          Type="int"
+          Property="Hotel/Properties[Id]" />
+        <SsdlProperty
+          Name="Name"
+          Nullable="False"
+          Type="nvarchar(max)"
+          Property="Hotel/Properties[Name]" />
+        <SsdlForeignKeyProperty
+          Name="AdresseId"
+          Nullable="False"
+          Type="int"
+          PropertyName="AdresseId" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_BewertungHotel_Hotel">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_BewertungHotel_Hotel" />
+        <SsdlAssociationSetEnd
+          End="LenzerheideData/Members[FK_BewertungHotel_Hotel]/Members[Hotel]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LenzerheideData/Members[FK_BewertungHotel_Hotel]/Members[BewertungHotel]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="HotelId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Hotel_Zusatzleistung_Hotel">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Hotel_Zusatzleistung_Hotel" />
+        <SsdlAssociationSetEnd
+          End="LenzerheideData/Members[FK_Hotel_Zusatzleistung_Hotel]/Members[Hotel]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LenzerheideData/Members[FK_Hotel_Zusatzleistung_Hotel]/Members[Hotel_Zusatzleistung]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="HotelId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+  </DataService>
+</ServiceApplication>

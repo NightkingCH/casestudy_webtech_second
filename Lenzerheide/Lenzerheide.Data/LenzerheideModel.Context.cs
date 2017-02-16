@@ -25,5 +25,19 @@ namespace Lenzerheide.Data
             throw new UnintentionalCodeFirstException();
         }
     
+        public virtual DbSet<Adresse> Adresse { get; set; }
+        public virtual DbSet<Bewertung> Bewertung { get; set; }
+        public virtual DbSet<BewertungHotel> BewertungHotel { get; set; }
+        public virtual DbSet<BewertungZimmer> BewertungZimmer { get; set; }
+        public virtual DbSet<Hotel> Hotel { get; set; }
+        public virtual DbSet<Hotel_Zusatzleistung> Hotel_Zusatzleistung { get; set; }
+        public virtual DbSet<Kunde> Kunde { get; set; }
+        public virtual DbSet<Land> Land { get; set; }
+        public virtual DbSet<Login> Login { get; set; }
+        public virtual DbSet<Ort> Ort { get; set; }
+        public virtual DbSet<Reservation> Reservation { get; set; }
+        public virtual DbSet<Zimmer> Zimmer { get; set; }
+        public virtual DbSet<Zimmer_Zusatzleistung> Zimmer_Zusatzleistung { get; set; }
+        public virtual DbSet<Zusatzleistung> Zusatzleistung { get; set; }
     }
 }

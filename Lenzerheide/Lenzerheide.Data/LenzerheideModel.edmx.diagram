@@ -4,7 +4,38 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="f9db55783516432abe5ffcddd7b5e7ba" Name="Diagram1" />
+      <Diagram DiagramId="f9db55783516432abe5ffcddd7b5e7ba" Name="Diagram1" >
+        <EntityTypeShape EntityType="LenzerheideModel.Adresse" Width="1.5" PointX="3" PointY="7.125" />
+        <EntityTypeShape EntityType="LenzerheideModel.Bewertung" Width="1.5" PointX="7.5" PointY="7.625" />
+        <EntityTypeShape EntityType="LenzerheideModel.BewertungHotel" Width="1.5" PointX="9.75" PointY="6" />
+        <EntityTypeShape EntityType="LenzerheideModel.BewertungZimmer" Width="1.5" PointX="9.75" PointY="9.5" />
+        <EntityTypeShape EntityType="LenzerheideModel.Hotel" Width="1.5" PointX="5.25" PointY="4.625" />
+        <EntityTypeShape EntityType="LenzerheideModel.Hotel_Zusatzleistung" Width="1.5" PointX="7.5" PointY="4.75" />
+        <EntityTypeShape EntityType="LenzerheideModel.Kunde" Width="1.5" PointX="5.25" PointY="8.875" />
+        <EntityTypeShape EntityType="LenzerheideModel.Land" Width="1.5" PointX="0.75" PointY="4.625" />
+        <EntityTypeShape EntityType="LenzerheideModel.Login" Width="1.5" PointX="7.5" PointY="13.625" />
+        <EntityTypeShape EntityType="LenzerheideModel.Ort" Width="1.5" PointX="0.75" PointY="7.625" />
+        <EntityTypeShape EntityType="LenzerheideModel.Reservation" Width="1.5" PointX="10.5" PointY="12.875" />
+        <EntityTypeShape EntityType="LenzerheideModel.Zimmer" Width="1.5" PointX="7.5" PointY="16.5" />
+        <EntityTypeShape EntityType="LenzerheideModel.Zimmer_Zusatzleistung" Width="1.5" PointX="12.75" PointY="9.375" />
+        <EntityTypeShape EntityType="LenzerheideModel.Zusatzleistung" Width="1.5" PointX="5.25" PointY="1.875" />
+        <AssociationConnector Association="LenzerheideModel.FK_Adresse_Land" />
+        <AssociationConnector Association="LenzerheideModel.FK_Adresse_Ort" />
+        <AssociationConnector Association="LenzerheideModel.FK_Hotel_Adresse" />
+        <AssociationConnector Association="LenzerheideModel.FK_Kunde_Adresse" />
+        <AssociationConnector Association="LenzerheideModel.FK_Bewertung_Kunde" />
+        <AssociationConnector Association="LenzerheideModel.FK_BewertungHotel_Bewertung" />
+        <AssociationConnector Association="LenzerheideModel.FK_BewertungZimmer_Bewertung" />
+        <AssociationConnector Association="LenzerheideModel.FK_BewertungHotel_Hotel" />
+        <AssociationConnector Association="LenzerheideModel.FK_BewertungZimmer_Zimmer" />
+        <AssociationConnector Association="LenzerheideModel.FK_Hotel_Zusatzleistung_Hotel" />
+        <AssociationConnector Association="LenzerheideModel.FK_Hotel_Zusatzleistung_Zusatzleistung" />
+        <AssociationConnector Association="LenzerheideModel.FK_Login_Kunde" />
+        <AssociationConnector Association="LenzerheideModel.FK_Reservation_Kunde" />
+        <AssociationConnector Association="LenzerheideModel.FK_Reservation_Zimmer" />
+        <AssociationConnector Association="LenzerheideModel.FK_Zimmer_Zusatzleistung_Zimmer" />
+        <AssociationConnector Association="LenzerheideModel.FK_Zimmer_Zusatzleistung_Zusatzleistung" />
+      </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
 </edmx:Edmx>

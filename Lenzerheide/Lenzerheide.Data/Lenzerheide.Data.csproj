@@ -51,6 +51,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Adresse.cs">
+      <DependentUpon>LenzerheideModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Bewertung.cs">
+      <DependentUpon>LenzerheideModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BewertungHotel.cs">
+      <DependentUpon>LenzerheideModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BewertungZimmer.cs">
+      <DependentUpon>LenzerheideModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel.cs">
+      <DependentUpon>LenzerheideModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Hotel_Zusatzleistung.cs">
+      <DependentUpon>LenzerheideModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Kunde.cs">
+      <DependentUpon>LenzerheideModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Land.cs">
+      <DependentUpon>LenzerheideModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="LenzerheideModel.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -66,7 +90,25 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>LenzerheideModel.edmx</DependentUpon>
     </Compile>
+    <Compile Include="Login.cs">
+      <DependentUpon>LenzerheideModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Ort.cs">
+      <DependentUpon>LenzerheideModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Reservation.cs">
+      <DependentUpon>LenzerheideModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Zimmer.cs">
+      <DependentUpon>LenzerheideModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Zimmer_Zusatzleistung.cs">
+      <DependentUpon>LenzerheideModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Zusatzleistung.cs">
+      <DependentUpon>LenzerheideModel.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -1,0 +1,257 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceApplication
+  Name="LightSwitchServiceApplication" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication.Attributes>
+    <Partial />
+  </ServiceApplication.Attributes>
+  <EntityType
+    Name="Zusatzleistung">
+    <EntityType.Methods>
+      <EntityMethod
+        Name="Delete">
+        <EntityMethod.Attributes>
+          <Generated />
+        </EntityMethod.Attributes>
+      </EntityMethod>
+    </EntityType.Methods>
+    <EntityType.Properties>
+      <KeyProperty
+        Name="Id"
+        IsReadOnly="True"
+        PropertyType=":Int32">
+        <KeyProperty.Attributes>
+          <Hidden />
+          <Required />
+          <NotSearchable />
+        </KeyProperty.Attributes>
+      </KeyProperty>
+      <EntityProperty
+        Name="Beschreibung"
+        PropertyType=":String">
+        <EntityProperty.Attributes>
+          <Required />
+          <MaxLength />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <NavigationProperty
+        Name="Hotel_Zusatzleistungs"
+        Association="FK_Hotel_Zusatzleistung_Zusatzleistung"
+        FromEnd="Zusatzleistung"
+        ToEnd="Hotel_Zusatzleistung" />
+      <NavigationProperty
+        Name="Zimmer_Zusatzleistungs"
+        Association="FK_Zimmer_Zusatzleistung_Zusatzleistung"
+        FromEnd="Zusatzleistung"
+        ToEnd="Zimmer_Zusatzleistung" />
+    </EntityType.Properties>
+  </EntityType>
+  <Association
+    Name="FK_Hotel_Zusatzleistung_Zusatzleistung">
+    <AssociationEnd
+      Name="Zusatzleistung"
+      Multiplicity="One"
+      EntityType="Zusatzleistung">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="Hotel_Zusatzleistung"
+      Multiplicity="Many"
+      EntityType="Hotel_Zusatzleistung" />
+  </Association>
+  <Association
+    Name="FK_Zimmer_Zusatzleistung_Zusatzleistung">
+    <AssociationEnd
+      Name="Zusatzleistung"
+      Multiplicity="One"
+      EntityType="Zusatzleistung">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="Zimmer_Zusatzleistung"
+      Multiplicity="Many"
+      EntityType="Zimmer_Zusatzleistung" />
+  </Association>
+  <EntityContainer
+    Name="LenzerheideData">
+    <EntityContainer.Attributes>
+      <Partial />
+    </EntityContainer.Attributes>
+    <EntitySet
+      Name="Zusatzleistungs"
+      CanDelete="True"
+      CanInsert="True"
+      CanUpdate="True"
+      EntityType="Zusatzleistung" />
+    <AssociationSet
+      Name="FK_Hotel_Zusatzleistung_Zusatzleistung"
+      Association="FK_Hotel_Zusatzleistung_Zusatzleistung">
+      <AssociationSetEnd
+        Name="Zusatzleistung"
+        EntitySet="Zusatzleistungs" />
+      <AssociationSetEnd
+        Name="Hotel_Zusatzleistung"
+        EntitySet="Hotel_Zusatzleistungs" />
+    </AssociationSet>
+    <AssociationSet
+      Name="FK_Zimmer_Zusatzleistung_Zusatzleistung"
+      Association="FK_Zimmer_Zusatzleistung_Zusatzleistung">
+      <AssociationSetEnd
+        Name="Zusatzleistung"
+        EntitySet="Zusatzleistungs" />
+      <AssociationSetEnd
+        Name="Zimmer_Zusatzleistung"
+        EntitySet="Zimmer_Zusatzleistungs" />
+    </AssociationSet>
+    <QueryOperation
+      Name="Zusatzleistungs_Single"
+      ReturnType="Zusatzleistung">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s)." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="Id" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="Id" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Zusatzleistungs" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="Id"
+        ParameterType="Microsoft.LightSwitch:Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'Id' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <QueryOperation
+      Name="Zusatzleistungs_SingleOrDefault"
+      ReturnType="Zusatzleistung">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s) or null if no such entity exists." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="Id" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="Id" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Zusatzleistungs" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="Id"
+        ParameterType="Microsoft.LightSwitch:Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'Id' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+  </EntityContainer>
+  <DataService
+    Name="LenzerheideDataDataService">
+    <DataService.Attributes>
+      <Partial />
+    </DataService.Attributes>
+    <EntitySetMapping
+      EntitySet="Zusatzleistungs">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="app"
+          Table="Zusatzleistung" />
+        <SsdlProperty
+          Name="Id"
+          Nullable="False"
+          StoreGeneratedPattern="Identity"
+          Type="int"
+          Property="Zusatzleistung/Properties[Id]" />
+        <SsdlProperty
+          Name="Beschreibung"
+          Nullable="False"
+          Type="nvarchar(max)"
+          Property="Zusatzleistung/Properties[Beschreibung]" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Hotel_Zusatzleistung_Zusatzleistung">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Hotel_Zusatzleistung_Zusatzleistung" />
+        <SsdlAssociationSetEnd
+          End="LenzerheideData/Members[FK_Hotel_Zusatzleistung_Zusatzleistung]/Members[Zusatzleistung]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LenzerheideData/Members[FK_Hotel_Zusatzleistung_Zusatzleistung]/Members[Hotel_Zusatzleistung]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ZusatzleistungId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Zimmer_Zusatzleistung_Zusatzleistung">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Zimmer_Zusatzleistung_Zusatzleistung" />
+        <SsdlAssociationSetEnd
+          End="LenzerheideData/Members[FK_Zimmer_Zusatzleistung_Zusatzleistung]/Members[Zusatzleistung]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LenzerheideData/Members[FK_Zimmer_Zusatzleistung_Zusatzleistung]/Members[Zimmer_Zusatzleistung]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="ZusatzleistungId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+  </DataService>
+</ServiceApplication>

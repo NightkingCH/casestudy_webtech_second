@@ -1,0 +1,267 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ServiceApplication
+  Name="LightSwitchServiceApplication" xmlns="http://schemas.microsoft.com/LightSwitch/2010/xaml/model">
+  <ServiceApplication.Attributes>
+    <Partial />
+  </ServiceApplication.Attributes>
+  <EntityType
+    Name="Bewertung">
+    <EntityType.Methods>
+      <EntityMethod
+        Name="Delete">
+        <EntityMethod.Attributes>
+          <Generated />
+        </EntityMethod.Attributes>
+      </EntityMethod>
+    </EntityType.Methods>
+    <EntityType.Properties>
+      <KeyProperty
+        Name="Id"
+        IsReadOnly="True"
+        PropertyType=":Int32">
+        <KeyProperty.Attributes>
+          <Hidden />
+          <Required />
+          <NotSearchable />
+        </KeyProperty.Attributes>
+      </KeyProperty>
+      <EntityProperty
+        Name="BewertungsTyp"
+        PropertyType=":Int32">
+        <EntityProperty.Attributes>
+          <Required />
+          <NotSearchable />
+        </EntityProperty.Attributes>
+      </EntityProperty>
+      <NavigationProperty
+        Name="Kunde"
+        Association="FK_Bewertung_Kunde"
+        FromEnd="Bewertung"
+        ToEnd="Kunde" />
+      <NavigationProperty
+        Name="BewertungHotels"
+        Association="FK_BewertungHotel_Bewertung"
+        FromEnd="Bewertung"
+        ToEnd="BewertungHotel" />
+      <NavigationProperty
+        Name="BewertungZimmers"
+        Association="FK_BewertungZimmer_Bewertung"
+        FromEnd="Bewertung"
+        ToEnd="BewertungZimmer" />
+    </EntityType.Properties>
+  </EntityType>
+  <Association
+    Name="FK_BewertungHotel_Bewertung">
+    <AssociationEnd
+      Name="Bewertung"
+      Multiplicity="One"
+      EntityType="Bewertung">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="BewertungHotel"
+      Multiplicity="Many"
+      EntityType="BewertungHotel" />
+  </Association>
+  <Association
+    Name="FK_BewertungZimmer_Bewertung">
+    <AssociationEnd
+      Name="Bewertung"
+      Multiplicity="One"
+      EntityType="Bewertung">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="BewertungZimmer"
+      Multiplicity="Many"
+      EntityType="BewertungZimmer" />
+  </Association>
+  <EntityContainer
+    Name="LenzerheideData">
+    <EntityContainer.Attributes>
+      <Partial />
+    </EntityContainer.Attributes>
+    <EntitySet
+      Name="Bewertungs"
+      CanDelete="True"
+      CanInsert="True"
+      CanUpdate="True"
+      EntityType="Bewertung" />
+    <AssociationSet
+      Name="FK_BewertungHotel_Bewertung"
+      Association="FK_BewertungHotel_Bewertung">
+      <AssociationSetEnd
+        Name="Bewertung"
+        EntitySet="Bewertungs" />
+      <AssociationSetEnd
+        Name="BewertungHotel"
+        EntitySet="BewertungHotels" />
+    </AssociationSet>
+    <AssociationSet
+      Name="FK_BewertungZimmer_Bewertung"
+      Association="FK_BewertungZimmer_Bewertung">
+      <AssociationSetEnd
+        Name="Bewertung"
+        EntitySet="Bewertungs" />
+      <AssociationSetEnd
+        Name="BewertungZimmer"
+        EntitySet="BewertungZimmers" />
+    </AssociationSet>
+    <QueryOperation
+      Name="Bewertungs_Single"
+      ReturnType="Bewertung">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s)." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="Id" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="Id" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Bewertungs" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="Id"
+        ParameterType="Microsoft.LightSwitch:Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'Id' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+    <QueryOperation
+      Name="Bewertungs_SingleOrDefault"
+      ReturnType="Bewertung">
+      <QueryOperation.Attributes>
+        <Generated />
+        <Description
+          Value="Returns the entity whose identity is specified by the parameter(s) or null if no such entity exists." />
+      </QueryOperation.Attributes>
+      <QueryOperation.FilterExpression>
+        <QueryFilterExpressionTree>
+          <BinaryExpression
+            NodeType="Equal">
+            <BinaryExpression.Left>
+              <ChainExpression>
+                <MemberExpression
+                  Member="Id" />
+              </ChainExpression>
+            </BinaryExpression.Left>
+            <BinaryExpression.Right>
+              <ParameterExpression
+                Parameter="Id" />
+            </BinaryExpression.Right>
+          </BinaryExpression>
+        </QueryFilterExpressionTree>
+      </QueryOperation.FilterExpression>
+      <QueryOperation.Source>
+        <QuerySourceExpressionTree>
+          <MemberExpression
+            Member="Bewertungs" />
+        </QuerySourceExpressionTree>
+      </QueryOperation.Source>
+      <QueryOperationParameter
+        Name="Id"
+        ParameterType="Microsoft.LightSwitch:Int32?">
+        <QueryOperationParameter.Attributes>
+          <Description
+            Value="The value of the 'Id' key property of the entity to retrieve." />
+        </QueryOperationParameter.Attributes>
+      </QueryOperationParameter>
+    </QueryOperation>
+  </EntityContainer>
+  <DataService
+    Name="LenzerheideDataDataService">
+    <DataService.Attributes>
+      <Partial />
+    </DataService.Attributes>
+    <EntitySetMapping
+      EntitySet="Bewertungs">
+      <EntitySetMapping.Attributes>
+        <SsdlEntitySet
+          Schema="app"
+          Table="Bewertung" />
+        <SsdlProperty
+          Name="Id"
+          Nullable="False"
+          StoreGeneratedPattern="Identity"
+          Type="int"
+          Property="Bewertung/Properties[Id]" />
+        <SsdlProperty
+          Name="BewertungsTyp"
+          Nullable="False"
+          Type="int"
+          Property="Bewertung/Properties[BewertungsTyp]" />
+        <SsdlForeignKeyProperty
+          Name="KundeId"
+          Nullable="False"
+          Type="int"
+          PropertyName="KundeId" />
+      </EntitySetMapping.Attributes>
+    </EntitySetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_BewertungHotel_Bewertung">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_BewertungHotel_Bewertung" />
+        <SsdlAssociationSetEnd
+          End="LenzerheideData/Members[FK_BewertungHotel_Bewertung]/Members[Bewertung]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LenzerheideData/Members[FK_BewertungHotel_Bewertung]/Members[BewertungHotel]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="BewertungId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_BewertungZimmer_Bewertung">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_BewertungZimmer_Bewertung" />
+        <SsdlAssociationSetEnd
+          End="LenzerheideData/Members[FK_BewertungZimmer_Bewertung]/Members[Bewertung]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LenzerheideData/Members[FK_BewertungZimmer_Bewertung]/Members[BewertungZimmer]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="BewertungId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+  </DataService>
+</ServiceApplication>
