@@ -19,6 +19,7 @@ namespace Lenzerheide.Data
         {
             this.BewertungHotel = new HashSet<BewertungHotel>();
             this.Hotel_Zusatzleistung = new HashSet<Hotel_Zusatzleistung>();
+            this.Zimmer = new HashSet<Zimmer>();
         }
     
         public int Id { get; set; }
@@ -30,5 +31,7 @@ namespace Lenzerheide.Data
         public virtual ICollection<BewertungHotel> BewertungHotel { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Hotel_Zusatzleistung> Hotel_Zusatzleistung { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Zimmer> Zimmer { get; set; }
     }
 }

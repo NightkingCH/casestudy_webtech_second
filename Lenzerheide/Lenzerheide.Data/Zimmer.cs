@@ -23,12 +23,14 @@ namespace Lenzerheide.Data
         }
     
         public int Id { get; set; }
+        public int HotelId { get; set; }
         public int RaumNummer { get; set; }
         public int AnzahlRaeume { get; set; }
         public int Kategorie { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<BewertungZimmer> BewertungZimmer { get; set; }
+        public virtual Hotel Hotel { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Reservation> Reservation { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

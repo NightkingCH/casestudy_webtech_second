@@ -52,72 +52,72 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Adresse.cs">
-      <DependentUpon>LenzerheideModel.tt</DependentUpon>
+      <DependentUpon>Lenzerheide.tt</DependentUpon>
     </Compile>
     <Compile Include="Bewertung.cs">
-      <DependentUpon>LenzerheideModel.tt</DependentUpon>
+      <DependentUpon>Lenzerheide.tt</DependentUpon>
     </Compile>
     <Compile Include="BewertungHotel.cs">
-      <DependentUpon>LenzerheideModel.tt</DependentUpon>
+      <DependentUpon>Lenzerheide.tt</DependentUpon>
     </Compile>
     <Compile Include="BewertungZimmer.cs">
-      <DependentUpon>LenzerheideModel.tt</DependentUpon>
+      <DependentUpon>Lenzerheide.tt</DependentUpon>
     </Compile>
     <Compile Include="Hotel.cs">
-      <DependentUpon>LenzerheideModel.tt</DependentUpon>
+      <DependentUpon>Lenzerheide.tt</DependentUpon>
     </Compile>
     <Compile Include="Hotel_Zusatzleistung.cs">
-      <DependentUpon>LenzerheideModel.tt</DependentUpon>
+      <DependentUpon>Lenzerheide.tt</DependentUpon>
     </Compile>
     <Compile Include="Kunde.cs">
-      <DependentUpon>LenzerheideModel.tt</DependentUpon>
+      <DependentUpon>Lenzerheide.tt</DependentUpon>
     </Compile>
     <Compile Include="Land.cs">
-      <DependentUpon>LenzerheideModel.tt</DependentUpon>
+      <DependentUpon>Lenzerheide.tt</DependentUpon>
     </Compile>
-    <Compile Include="LenzerheideModel.Context.cs">
+    <Compile Include="Lenzerheide.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LenzerheideModel.Context.tt</DependentUpon>
+      <DependentUpon>Lenzerheide.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="LenzerheideModel.cs">
+    <Compile Include="Lenzerheide.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LenzerheideModel.tt</DependentUpon>
+      <DependentUpon>Lenzerheide.tt</DependentUpon>
     </Compile>
-    <Compile Include="LenzerheideModel.Designer.cs">
+    <Compile Include="Lenzerheide.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>LenzerheideModel.edmx</DependentUpon>
+      <DependentUpon>Lenzerheide.edmx</DependentUpon>
     </Compile>
     <Compile Include="Login.cs">
-      <DependentUpon>LenzerheideModel.tt</DependentUpon>
+      <DependentUpon>Lenzerheide.tt</DependentUpon>
     </Compile>
     <Compile Include="Ort.cs">
-      <DependentUpon>LenzerheideModel.tt</DependentUpon>
+      <DependentUpon>Lenzerheide.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reservation.cs">
-      <DependentUpon>LenzerheideModel.tt</DependentUpon>
+      <DependentUpon>Lenzerheide.tt</DependentUpon>
     </Compile>
     <Compile Include="Zimmer.cs">
-      <DependentUpon>LenzerheideModel.tt</DependentUpon>
+      <DependentUpon>Lenzerheide.tt</DependentUpon>
     </Compile>
     <Compile Include="Zimmer_Zusatzleistung.cs">
-      <DependentUpon>LenzerheideModel.tt</DependentUpon>
+      <DependentUpon>Lenzerheide.tt</DependentUpon>
     </Compile>
     <Compile Include="Zusatzleistung.cs">
-      <DependentUpon>LenzerheideModel.tt</DependentUpon>
+      <DependentUpon>Lenzerheide.tt</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <EntityDeploy Include="LenzerheideModel.edmx">
+    <EntityDeploy Include="Lenzerheide.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>LenzerheideModel.Designer.cs</LastGenOutput>
+      <LastGenOutput>Lenzerheide.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="LenzerheideModel.edmx.diagram">
-      <DependentUpon>LenzerheideModel.edmx</DependentUpon>
+    <None Include="Lenzerheide.edmx.diagram">
+      <DependentUpon>Lenzerheide.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
   </ItemGroup>
@@ -125,15 +125,15 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="LenzerheideModel.Context.tt">
+    <Content Include="Lenzerheide.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LenzerheideModel.edmx</DependentUpon>
-      <LastGenOutput>LenzerheideModel.Context.cs</LastGenOutput>
+      <DependentUpon>Lenzerheide.edmx</DependentUpon>
+      <LastGenOutput>Lenzerheide.Context.cs</LastGenOutput>
     </Content>
-    <Content Include="LenzerheideModel.tt">
+    <Content Include="Lenzerheide.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>LenzerheideModel.edmx</DependentUpon>
-      <LastGenOutput>LenzerheideModel.cs</LastGenOutput>
+      <DependentUpon>Lenzerheide.edmx</DependentUpon>
+      <LastGenOutput>Lenzerheide.cs</LastGenOutput>
     </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
