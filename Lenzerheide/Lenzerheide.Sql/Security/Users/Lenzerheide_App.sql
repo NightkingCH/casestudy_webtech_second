@@ -1,3 +1,18 @@
-﻿CREATE USER [Lenzerheide_App] FOR LOGIN [Lenzerheide_App]
+﻿/******************************************************************************
+**  Description: Database specific user bound to a login
+**
+**
+**
+**  Author: T. Erni
+**  Date: 09.03.2017
+**
+**
+*******************************************************************************
+**  Change History
+*******************************************************************************
+**  Date:      Author:         Description:
+**  --------    --------------  -----------------------------------------------
+******************************************************************************/
+CREATE USER [Lenzerheide_App] FOR LOGIN [Lenzerheide_App]
     WITH DEFAULT_SCHEMA = [dbo];
 GO

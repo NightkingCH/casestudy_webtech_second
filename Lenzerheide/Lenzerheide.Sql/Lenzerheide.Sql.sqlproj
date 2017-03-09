@@ -70,6 +70,7 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="PostDeployment\Script.PostDeployment.sql" />
+    <None Include="00_BackUp\Lenzerheide.bak" />
   </ItemGroup>
   <ItemGroup>
     <PreDeploy Include="PreDeployment\Script.PreDeployment.sql" />

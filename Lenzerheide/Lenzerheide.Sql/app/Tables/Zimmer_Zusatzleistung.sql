@@ -1,4 +1,19 @@
-﻿CREATE TABLE [app].Zimmer_Zusatzleistung
+﻿/******************************************************************************
+**  Description: Special service which a room offers to its customers
+**
+**
+**
+**  Author: T. Erni
+**  Date: 09.03.2017
+**
+**
+*******************************************************************************
+**  Change History
+*******************************************************************************
+**  Date:      Author:         Description:
+**  --------    --------------  -----------------------------------------------
+******************************************************************************/
+CREATE TABLE [app].Zimmer_Zusatzleistung
 (
 	[Id] INT NOT NULL IDENTITY(1,1),
 	[ZimmerId] INT NOT NULL,
