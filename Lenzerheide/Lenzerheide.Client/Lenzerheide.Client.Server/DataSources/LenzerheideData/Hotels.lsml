@@ -48,6 +48,11 @@
         Association="FK_Hotel_Zusatzleistung_Hotel"
         FromEnd="Hotel"
         ToEnd="Hotel_Zusatzleistung" />
+      <NavigationProperty
+        Name="Zimmers"
+        Association="FK_Zimmer_Hotel"
+        FromEnd="Hotel"
+        ToEnd="Zimmer" />
     </EntityType.Properties>
   </EntityType>
   <Association
@@ -191,7 +196,32 @@
         </QueryOperationParameter.Attributes>
       </QueryOperationParameter>
     </QueryOperation>
+    <AssociationSet
+      Name="FK_Zimmer_Hotel"
+      Association="FK_Zimmer_Hotel">
+      <AssociationSetEnd
+        Name="Hotel"
+        EntitySet="Hotels" />
+      <AssociationSetEnd
+        Name="Zimmer"
+        EntitySet="Zimmers" />
+    </AssociationSet>
   </EntityContainer>
+  <Association
+    Name="FK_Zimmer_Hotel">
+    <AssociationEnd
+      Name="Hotel"
+      Multiplicity="One"
+      EntityType="Hotel">
+      <AssociationEnd.Attributes>
+        <DeleteRule />
+      </AssociationEnd.Attributes>
+    </AssociationEnd>
+    <AssociationEnd
+      Name="Zimmer"
+      Multiplicity="Many"
+      EntityType="Zimmer" />
+  </Association>
   <DataService
     Name="LenzerheideDataDataService">
     <DataService.Attributes>
@@ -256,6 +286,27 @@
         </SsdlAssociationSetEnd>
         <SsdlAssociationSetEnd
           End="LenzerheideData/Members[FK_Hotel_Zusatzleistung_Hotel]/Members[Hotel_Zusatzleistung]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="HotelId" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+      </AssociationSetMapping.Attributes>
+    </AssociationSetMapping>
+    <AssociationSetMapping
+      AssociationSet="FK_Zimmer_Hotel">
+      <AssociationSetMapping.Attributes>
+        <SsdlAssociationSet
+          Name="FK_Zimmer_Hotel" />
+        <SsdlAssociationSetEnd
+          End="LenzerheideData/Members[FK_Zimmer_Hotel]/Members[Hotel]">
+          <SsdlAssociationSetEnd.Attributes>
+            <SsdlPropertyRef
+              Name="Id" />
+          </SsdlAssociationSetEnd.Attributes>
+        </SsdlAssociationSetEnd>
+        <SsdlAssociationSetEnd
+          End="LenzerheideData/Members[FK_Zimmer_Hotel]/Members[Zimmer]">
           <SsdlAssociationSetEnd.Attributes>
             <SsdlPropertyRef
               Name="HotelId" />

@@ -64,6 +64,11 @@
         Association="FK_Zimmer_Zusatzleistung_Zimmer"
         FromEnd="Zimmer"
         ToEnd="Zimmer_Zusatzleistung" />
+      <NavigationProperty
+        Name="Hotel"
+        Association="FK_Zimmer_Hotel"
+        FromEnd="Zimmer"
+        ToEnd="Hotel" />
     </EntityType.Properties>
   </EntityType>
   <Association
@@ -265,6 +270,11 @@
           Nullable="False"
           Type="int"
           Property="Zimmer/Properties[Kategorie]" />
+        <SsdlForeignKeyProperty
+          Name="HotelId"
+          Nullable="False"
+          Type="int"
+          PropertyName="HotelId" />
       </EntitySetMapping.Attributes>
     </EntitySetMapping>
     <AssociationSetMapping

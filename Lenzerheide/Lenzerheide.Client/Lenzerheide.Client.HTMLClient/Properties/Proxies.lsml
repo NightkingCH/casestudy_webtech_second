@@ -7,18 +7,6 @@
   <EntityType>
     <EntityType.Attributes>
       <Proxy
-        Target="ServiceInterface:Adresse" />
-    </EntityType.Attributes>
-  </EntityType>
-  <EntityType>
-    <EntityType.Attributes>
-      <Proxy
-        Target="ServiceInterface:Bewertung" />
-    </EntityType.Attributes>
-  </EntityType>
-  <EntityType>
-    <EntityType.Attributes>
-      <Proxy
         Target="ServiceInterface:BewertungHotel" />
     </EntityType.Attributes>
   </EntityType>
@@ -31,19 +19,7 @@
   <EntityType>
     <EntityType.Attributes>
       <Proxy
-        Target="ServiceInterface:Hotel" />
-    </EntityType.Attributes>
-  </EntityType>
-  <EntityType>
-    <EntityType.Attributes>
-      <Proxy
         Target="ServiceInterface:Hotel_Zusatzleistung" />
-    </EntityType.Attributes>
-  </EntityType>
-  <EntityType>
-    <EntityType.Attributes>
-      <Proxy
-        Target="ServiceInterface:Kunde" />
     </EntityType.Attributes>
   </EntityType>
   <EntityType>
@@ -62,18 +38,6 @@
     <EntityType.Attributes>
       <Proxy
         Target="ServiceInterface:Ort" />
-    </EntityType.Attributes>
-  </EntityType>
-  <EntityType>
-    <EntityType.Attributes>
-      <Proxy
-        Target="ServiceInterface:Reservation" />
-    </EntityType.Attributes>
-  </EntityType>
-  <EntityType>
-    <EntityType.Attributes>
-      <Proxy
-        Target="ServiceInterface:Zimmer" />
     </EntityType.Attributes>
   </EntityType>
   <EntityType>
@@ -190,4 +154,10 @@
         Target="ServiceInterface:LenzerheideData" />
     </EntityContainer.Attributes>
   </EntityContainer>
+  <Association>
+    <Association.Attributes>
+      <Proxy
+        Target="ServiceInterface:FK_Zimmer_Hotel" />
+    </Association.Attributes>
+  </Association>
 </Application>
